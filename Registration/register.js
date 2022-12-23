@@ -20,7 +20,7 @@ function checkUsername() {
 function checkPassword() {
 	var password = document.getElementById("password").value;
 	if (password == "") {
-		alert("Pole hasło nie może być puste");
+		alert("Pole hasło nie może być puste!");
 		return false;
 	}
 	if (password.length < 6) {
