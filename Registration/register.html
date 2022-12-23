@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="/css/registerStyle.css">
+
+    <script src="/Registration/register.js"></script>
+
+
+</head>
+
+<body>
+
+    <form action="/index.html">
+
+        <label>Nazwa użytkownika<input type="text" id="login" name="Login" pattern="\w{6,16}" required></label>
+        <label>Adres E-mail<input type="email" id="email" name="email" required></label>
+        <label>Potwierdź E-mail<input type="email" id="confirmEmail" name="confirmEmail" required></label>
+        <label>Hasło<input type="password" id="password" name="pass" required></label><br>
+        <input type="submit" value="Zarejestruj" onclick="return checkUsername(), checkEmail(), checkPassword()">
+
+
+
+
+    </form>
+
+
+
+
+
+
+</body>
+
+</html>
