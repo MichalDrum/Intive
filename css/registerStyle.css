@@ -1,12 +1,23 @@
+body {
+    background-color: rgba(21, 189, 222, 0.781);
+    font-style: normal;
+    font-weight: 900;
+}
+
+input {
+    display: flex;
+    flex-direction: column;
+  }
+
 label {
     display: block;
     margin-top: 1em;
 }
 
-input:valid {
+/* input:valid {
     background-color: palegreen;
 }
 
 input:invalid {
     background-color: lightpink;
-}
+} */
