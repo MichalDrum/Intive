@@ -25,11 +25,7 @@
 
         <label>Potwierdź E-mail<input type="email" id="confirmEmail" name="confirmEmail" placeholder="Potwierdź Email" required></label><br>
         
-        <input type="submit" value="Zarejestruj" onclick="return checkUsername(), checkPassword(), checkEmail()">
-
-
-
-
+        <input type="submit" value="Zarejestruj" onclick="return validateRegisterForm(), setUserToLocalStorage()">
     </form>
 
 
