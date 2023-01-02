@@ -6,6 +6,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="/css/registerStyle.css">
 
     <script src="/Registration/register.js"></script>
@@ -17,14 +22,16 @@
 
     <form action="/index.html">
 
-        <label>Nazwa użytkownika<input type="text" id="login" name="Login" placeholder="Nazwa użytkownika" pattern="\w{6,16}" required></label>
+        <label>Nazwa użytkownika<input type="text" id="login" name="Login" placeholder="Nazwa użytkownika"
+                pattern="\w{6,16}" required></label>
 
         <label>Hasło<input type="password" id="password" name="pass" placeholder="Hasło" required></label>
 
         <label>Adres E-mail<input type="email" id="email" name="email" placeholder="Wpisz Email" required></label>
 
-        <label>Potwierdź E-mail<input type="email" id="confirmEmail" name="confirmEmail" placeholder="Potwierdź Email" required></label><br>
-        
+        <label>Potwierdź E-mail<input type="email" id="confirmEmail" name="confirmEmail" placeholder="Potwierdź Email"
+                required></label><br>
+
         <input type="submit" value="Zarejestruj" onclick="return validateRegisterForm(), setUserToLocalStorage()">
     </form>
 
