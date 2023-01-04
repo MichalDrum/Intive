@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/gridStyle.css">
 
 </head>
 
@@ -19,13 +20,13 @@
     <form id="loginForm" action="/dashboard/dashboard.html">
 
 
-        <label>Nazwa użytkownika / Email<input type="name" id="name" name="name" placeholder="Podaj login lub Email"
-                required></label>
+        <label>Nazwa użytkownika / Email</label>
+        <input type="name" id="name" name="name" required>
 
-        <label>Hasło<input type="password" id="login_password" name="password" placeholder="Podaj hasło"
-                required</label><br>
+        <label>Hasło</label>
+        <input type="password" id="login_password" name="password" required><br>
 
-            <input type="submit" id="tryLog" value="Zaloguj" onclick="return signIn()">
+        <input type="submit" id="tryLog" value="Zaloguj" onclick="return signIn()">
     </form>
 
 
