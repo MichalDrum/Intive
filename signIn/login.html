@@ -11,12 +11,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="\css\registerStyle.css">
-    <script src="/signIn/login.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+
 </head>
 
 <body>
-    <form id="loginForm">
+    <form id="loginForm" action="/dashboard/dashboard.html">
+
 
         <label>Nazwa użytkownika / Email<input type="name" id="name" name="name" placeholder="Podaj login lub Email"
                 required></label>
@@ -27,6 +28,8 @@
             <input type="submit" id="tryLog" value="Zaloguj" onclick="return signIn()">
     </form>
 
+
+    <script src="/signIn/login.js"></script>
 </body>
 
 </html>

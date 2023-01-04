@@ -12,5 +12,6 @@ function signIn() {
 		alert("Podane hasło jest nieprawidłowe!");
 		return false;
 	}
+
 	return true;
 }

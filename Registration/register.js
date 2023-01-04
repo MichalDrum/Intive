@@ -42,5 +42,6 @@ function setUserToLocalStorage(){
 
 	window.localStorage.setItem(email, password);
 	window.localStorage.setItem(userName, password);
-
+	window.localStorage.setItem(email, userName);
 }
+
