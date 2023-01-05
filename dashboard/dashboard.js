@@ -1,5 +1,8 @@
-fetch("https://api.npoint.io/38edf0c5f3eb9ac768bd")
-    .then(res => res.json())
-    .then(res => {
-        console.log(res);
-    })
+// Get the active user from local storage
+const activeUser = localStorage.getItem("activeUser");
+
+// Check if the user is logged in
+if (activeUser) {
+	// If the user is logged in, display the username
+	document.getElementById("username").innerHTML = activeUser;
+}

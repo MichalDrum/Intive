@@ -24,15 +24,26 @@
 <body>
 
     <div class="navigator">
-        <nav>
-                <button onclick="location.href='/index.html'">Wyloguj</button>
+        <nav class="dashboard-ui">
+            <p>Welcome, <span id="username"></span></p>
+            <button class="logout" onclick="location.href='/index.html'">Wyloguj</button>
         </nav>
     </div>
 
-    
+
 
 
     <script src="dashboard\dashboard.js"></script>
+    <script>
+        // Get the active user from local storage
+        const activeUser = localStorage.getItem('activeUser');
+
+        // Check if the user is logged in
+        if (activeUser) {
+            // If the user is logged in, display the username
+            document.getElementById('username').innerHTML = activeUser;
+        }
+    </script>
 </body>
 
 </html>
