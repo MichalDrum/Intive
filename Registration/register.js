@@ -1,4 +1,4 @@
-function validateRegisterForm(){
+function validateRegisterForm() {
 	var email = document.getElementById("email").value;
 	var confirmEmail = document.getElementById("confirmEmail").value;
 	var userName = document.getElementById("login").value;
@@ -25,23 +25,22 @@ function validateRegisterForm(){
 	return true;
 }
 
-function setUserToLocalStorage(){
+function setUserToLocalStorage() {
 	var email = document.getElementById("email").value;
 	var userName = document.getElementById("login").value;
 	var password = document.getElementById("password").value;
 
 	//check if username already exist
 	if (localStorage.getItem(userName) !== null) {
-		alert(`Nazwa użytwkonika już istnieje, proszę wybrać inną nazwę.`);
-		return false
+		alert(`Nazwa użytkownika już istnieje, proszę wybrać inną nazwę.`);
+		return false;
 	}
 	if (localStorage.getItem(email) !== null) {
 		alert(`Adres e-mail jest już zajęty.`);
-		return false
+		return false;
 	}
 
 	window.localStorage.setItem(email, password);
 	window.localStorage.setItem(userName, password);
 	window.localStorage.setItem(email, userName);
 }
-

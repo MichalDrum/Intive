@@ -7,30 +7,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
 
+    <!-- <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet"> -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Open+Sans:wght@400;700&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="/css/style.css">
+    <!-- <link rel="stylesheet" href="/css/gridStyle.css"> -->
 
 
 
 </head>
 
 <body>
-
+    <div class="navigator">
+        <nav>
+                <button onclick="location.href='/signIn/login.html'">Logowanie</button>
+        </nav>
+    </div>
 
     <form id="regForm" action="/dashboard/dashboard.html">
 
-        <label>Nazwa użytkownika<input type="text" id="login" name="Login" placeholder="Nazwa użytkownika"
-                pattern="\w{6,16}" required></label>
+        <label>Nazwa użytkownika</label>
+        <input type="text" id="login" name="Login" pattern="\w{6,16}" required>
 
-        <label>Hasło<input type="password" id="password" name="pass" placeholder="Hasło" required></label>
+        <label>Hasło</label>
+        <input type="password" id="password" name="pass" required>
 
-        <label>Adres E-mail<input type="email" id="email" name="email" placeholder="Wpisz Email" required></label>
+        <label>Adres E-mail</label>
+        <input type="email" id="email" name="email" required>
 
-        <label>Potwierdź E-mail<input type="email" id="confirmEmail" name="confirmEmail" placeholder="Potwierdź Email"
-                required></label><br>
+        <label>Potwierdź E-mail</label>
+        <input type="email" id="confirmEmail" name="confirmEmail" required><br>
 
         <input type="submit" value="Zarejestruj" onclick="return validateRegisterForm(), setUserToLocalStorage()">
     </form>
