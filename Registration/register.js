@@ -10,7 +10,7 @@ document.getElementById("regForm").onsubmit = function () {
 		setUserToLocalStorage();
 
 		// Redirect to a new page
-		window.location.href = "http://127.0.0.1:5500/dashboard/dashboard.html";
+		window.location.href = "/dashboard/dashboard.html";
 	}
 };
 

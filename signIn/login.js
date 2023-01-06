@@ -12,6 +12,11 @@ function signIn() {
 	// Find the user with the entered username
 	loggedInUser = userDataArray.find(u => u.name === userName);
 
+	//  Find the user by email
+	if (!loggedInUser) {
+		loggedInUser = userDataArray.find(u => u.email === userName);
+	}
+
 	// If the user doesn't exist, show an error message
 	if (!loggedInUser) {
 		alert(`Użytkownik nie istnieje!`);
@@ -25,9 +30,9 @@ function signIn() {
 	}
 
 	// Set active user
-	window.localStorage.setItem("activeUser", name);
+	window.localStorage.setItem("activeUser", loggedInUser.name);
 
 	// Redirect to a new page if login is successful
-	window.location.href = "http://127.0.0.1:5500/dashboard/dashboard.html";
+	window.location.href = "/dashboard/dashboard.html";
 	return true;
 }

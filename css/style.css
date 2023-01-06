@@ -1,7 +1,4 @@
 @media (max-width: 760px) {
-	.test {
-
-	}
 }
 
 body {
@@ -95,11 +92,101 @@ input {
 .navigator nav {
 	padding: 0 20px;
 }
-
-/* input:valid {
-    background-color: palegreen;
+#username {
+	margin-right: 20px;
+}
+#transactionChart {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	height: auto;
+}
+.chart-wrapper {
+	display: block;
+	justify-content: center;
+	width: 800px;
+	height: auto;
 }
 
-input:invalid {
-    background-color: lightpink;
-} */
+table {
+	border-collapse: collapse;
+	width: 100%;
+	overflow: hidden;
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+	-webkit-animation: float 5s infinite;
+	animation: float 5s infinite;
+}
+
+thead tr {
+	background-color: #009879;
+	color: #333333; /* Soft black */
+	text-align: left;
+	font-weight: bold;
+	padding: 20px; /* Added padding */
+}
+
+tbody tr {
+	border-bottom: 1px solid #dddddd;
+	background-color: #f5f5f5;
+	padding: 20px; /* Added padding */
+}
+
+tbody tr:nth-child(odd) {
+	background-color: #eeeeee;
+}
+
+tbody tr:hover {
+	background-color: #d1d1d1;
+	cursor: pointer;
+}
+
+td {
+	padding: 10px;
+	text-align: left;
+}
+
+/* Responsive styles for mobile devices */
+@media (max-width: 768px) {
+	thead {
+		display: none; /* Hide header on mobile */
+	}
+
+	tbody tr {
+		border: 1px solid #dddddd; /* Add border to rows on mobile */
+	}
+
+	td {
+		display: flex; /* Make cells display as flex items */
+		flex-wrap: wrap; /* Allow cell contents to wrap */
+	}
+
+	/* Make type icon and description take up full width on mobile */
+	td:first-child,
+	td:nth-child(2) {
+		width: 100%;
+	}
+}
+
+@-webkit-keyframes float {
+	0% {
+		-webkit-transform: translateY(0);
+	}
+	50% {
+		-webkit-transform: translateY(-5px);
+	}
+	100% {
+		-webkit-transform: translateY(0);
+	}
+}
+
+@keyframes float {
+	0% {
+		transform: translateY(0);
+	}
+	50% {
+		transform: translateY(-5px);
+	}
+	100% {
+		transform: translateY(0);
+	}
+}

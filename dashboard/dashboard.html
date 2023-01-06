@@ -17,6 +17,8 @@
         rel="stylesheet">
 
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
 
 </head>
@@ -25,25 +27,24 @@
 
     <div class="navigator">
         <nav class="dashboard-ui">
-            <p>Welcome, <span id="username"></span></p>
+            <p>Witaj, <span id="username"></span></p>
             <button class="logout" onclick="location.href='/index.html'">Wyloguj</button>
         </nav>
     </div>
 
+    <div id="fetchData">
+        <div id="transactionChart">
+            <div class="chart-wrapper">
+                <canvas id="chart"></canvas>
+            </div>
+        </div>
+        <div id="transactionHistory">
+            <div id="transaction-table-wrapper"></div>
+        </div>
+    </div>
 
+    <script src="dashboard.js"></script>
 
-
-    <script src="dashboard\dashboard.js"></script>
-    <script>
-        // Get the active user from local storage
-        const activeUser = localStorage.getItem('activeUser');
-
-        // Check if the user is logged in
-        if (activeUser) {
-            // If the user is logged in, display the username
-            document.getElementById('username').innerHTML = activeUser;
-        }
-    </script>
 </body>
 
 </html>
