@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Open+Sans:wght@400;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="./../css/style.css">
     <!-- <link rel="stylesheet" href="/css/gridStyle.css"> -->
 
 </head>
@@ -24,21 +24,23 @@
 <body>
     <div class="navigator">
         <nav>
-            <button onclick="location.href='/Registration/register.html'">Rejestracja</button>
+            <button onclick="location.href='./../Registration/register.html'">Rejestracja</button>
         </nav>
     </div>
 
 
-    <form id="loginForm" action="/dashboard/dashboard.html">
+    <form id="loginForm" action="" novalidate>
 
+        <div class="form-group">
+            <label>Nazwa użytkownika / Email</label>
+            <input type="text" id="login" name="login" required>
+        </div>
+        <div class="form-group">
+            <label>Hasło</label>
+            <input type="password" id="password" name="pass" required>
 
-        <label>Nazwa użytkownika / Email</label>
-        <input type="name" id="name" name="name" required>
-
-        <label>Hasło</label>
-        <input type="password" id="login_password" name="password" required><br>
-
-        <input type="submit" id="tryLog" value="Zaloguj" onclick="return signIn()">
+            <input class="form-submit-button" type="submit" id="login-button" value="Zaloguj">
+        </div>
 
     </form>
 
@@ -46,7 +48,7 @@
 
 
 
-    <script src="/signIn/login.js"></script>
+    <script src="./login.js"></script>
 </body>
 
 </html>

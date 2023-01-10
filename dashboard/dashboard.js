@@ -19,42 +19,51 @@ async function fetchTransactionAPI() {
 		"transaction-table-wrapper"
 	);
 	const response = await fetch("https://api.npoint.io/38edf0c5f3eb9ac768bd");
-	const transactions = await response.json();
-	console.log(transactions, transactions.transactionTypes);
-	console.log(Object.values(transactions.transacationTypes));
+	const apiResponse = await response.json();
+	console.log(apiResponse);
+	// console.log(Object.values(transactions.transacationTypes));
 
 	// Generate table from data
 	const table = generateTable(
-		transactions.transactions,
-		transactions.transactionTypes
+		apiResponse.transactions,
+		apiResponse.transacationTypes
 	);
 
-	transactionChart(transactions, transactions.transactionTypes);
+	// Generate chart from data
+	const chartPie = transactionChart(
+		apiResponse.transactions,
+		apiResponse.transacationTypes
+	);
 
 	// Append table to wrapper
 	transactionsTableWrapper.appendChild(table);
 }
 
-function transactionChart(data, transactionTypes) {
+function transactionChart(dataArray, labelsArray) {
 	// check if data and transactionTypes are defined
-	if (!data || !transactionTypes) {
+	if (!dataArray || !labelsArray) {
 		console.error("Data or transaction types are not defined");
 		return;
 	}
+
+	const typeCount = dataArray
+		.map(item => item.type)
+		.reduce((acc, curr) => {
+			acc[curr] = acc[curr] ? acc[curr] + 1 : 1;
+			return acc;
+		}, {});
+
+	const chartLabels = Object.keys(typeCount).map(key => labelsArray[key]);
+	const chartData = Object.values(typeCount);
 
 	var ctx = document.getElementById("chart").getContext("2d");
 	var myPieChart = new Chart(ctx, {
 		type: "pie",
 		data: {
-			labels: Object.values(transactionTypes), // labels for each slice of the pie
+			labels: chartLabels, // labels for each slice of the pie
 			datasets: [
 				{
-					data: data.transactions
-						.map(t => t.type)
-						.reduce((acc, type) => {
-							acc[type] = (acc[type] || 0) + 1;
-							return acc;
-						}, {}), // count of each transaction type
+					data: chartData, // count of each transaction type
 					backgroundColor: ["#007bff", "#28a745", "#333333", "#c3e6cb"], // colors for each slice of the pie
 				},
 			],

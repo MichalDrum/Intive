@@ -51,19 +51,43 @@ button:hover {
 	text-align: right;
 	font-size: 15px;
 }
+
+label {
+	text-align: right;
+}
+
 form {
-	display: grid;
+	display: flex;
+	flex-direction: column;
+	grid-gap: 1rem;
 	padding: 1em;
 	background: #f9f9f9;
 	border: 1px solid #c1c1c1;
 	margin: 2rem auto 0 auto;
-	max-width: 600px;
+	max-width: 450px;
 	padding: 1em;
 }
+
+form .form-group {
+	display: grid;
+	grid-template-columns: minmax(120px, 1fr) minmax(180px, 1fr);
+	grid-gap: 0.5rem;
+}
+
+.notification {
+	grid-column: 2/3;
+	text-align: right;
+}
+
 form input {
 	background: #fff;
 	border: 1px solid #9c9c9c;
 }
+
+.form-submit-button {
+	grid-column: 1 / -1;
+}
+
 form button {
 	background: lightgrey;
 	padding: 0.7em;
@@ -73,12 +97,15 @@ form button {
 	flex-direction: row-reverse;
 }
 label {
+	display: flex;
+	text-align: right;
+	align-items: center;
+	justify-content: flex-end;
 	padding: 0.5em 0.5em 0.5em 0;
 	grid-column: 1 / 2;
 }
 input {
-	padding: 0.7em;
-	margin-bottom: 0.5rem;
+	padding: 17px;
 	grid-column: 2 / 2;
 }
 .navigator {
@@ -113,8 +140,6 @@ table {
 	width: 100%;
 	overflow: hidden;
 	box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-	-webkit-animation: float 5s infinite;
-	animation: float 5s infinite;
 }
 
 thead tr {
@@ -145,6 +170,11 @@ td {
 	text-align: left;
 }
 
+canvas.chart-canvas {
+	width: 100%;
+	height: auto;
+}
+
 /* Responsive styles for mobile devices */
 @media (max-width: 768px) {
 	thead {
@@ -166,27 +196,12 @@ td {
 		width: 100%;
 	}
 }
-
-@-webkit-keyframes float {
-	0% {
-		-webkit-transform: translateY(0);
-	}
-	50% {
-		-webkit-transform: translateY(-5px);
-	}
-	100% {
-		-webkit-transform: translateY(0);
-	}
+.notification {
+	font-size: 10px;
+	color: red;
 }
-
-@keyframes float {
-	0% {
-		transform: translateY(0);
-	}
-	50% {
-		transform: translateY(-5px);
-	}
-	100% {
-		transform: translateY(0);
-	}
+input[type="submit"] {
+	cursor: pointer;
+}
+input[type="submit"]:hover {
 }

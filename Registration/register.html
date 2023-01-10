@@ -16,7 +16,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Open+Sans:wght@400;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="./../css/style.css">
     <!-- <link rel="stylesheet" href="/css/gridStyle.css"> -->
 
 
@@ -26,33 +26,40 @@
 <body>
     <div class="navigator">
         <nav>
-            <button onclick="location.href='/signIn/login.html'">Logowanie</button>
+            <button onclick="location.href='./../signIn/login.html'">Logowanie</button>
         </nav>
     </div>
 
-    <form id="regForm">
+    <form id="regForm" action="" novalidate>
 
-        <label>Nazwa użytkownika</label>
-        <input type="text" id="login" name="Login" pattern="\w{6,16}" required>
+        <div class="form-group">
+            <label for="login">Nazwa użytkownika</label>
+            <input type="text" id="login" name="login" pattern="\w{6,16}" required>
+            <div class="notification"></div>
+        </div>
 
-        <label>Hasło</label>
-        <input type="password" id="password" name="pass" required>
+        <div class="form-group">
+            <label for="password">Hasło</label>
+            <input type="password" id="password" name="pass" required>
+            <div class="notification"></div>
+        </div>
 
-        <label>Adres E-mail</label>
-        <input type="email" id="email" name="email" required>
+        <div class="form-group">
+            <label for="email">Adres E-mail</label>
+            <input type="email" id="email" name="email" required>
+            <div class="notification"></div>
+        </div>
 
-        <label>Potwierdź E-mail</label>
-        <input type="email" id="confirmEmail" name="confirmEmail" required><br>
+        <div class="form-group">
+            <label for="confirmEmail">Potwierdź E-mail</label>
+            <input type="email" id="confirmEmail" name="confirmEmail" required>
+            <div class="notification"></div>
+        </div>
 
-        <input type="submit" value="Zarejestruj">
+        <input class="form-submit-button" type="submit" value="Zarejestruj">
     </form>
 
-
-
-
-
-
-    <script src="/Registration/register.js"></script>
+    <script src="./register.js"></script>
 </body>
 
 </html>
