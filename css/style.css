@@ -1,4 +1,30 @@
-@media (max-width: 760px) {
+@media screen and (width <= 767px) {
+	div.navigator nav.dashboard-ui {
+		justify-content: space-between;
+	}
+
+	.logout {
+		height: auto;
+		padding: 6px 16px;
+	}
+
+	.dashboard-ui p {
+		display: grid;
+		place-items: left center;
+		font-size: 12px;
+	}
+
+	/* Add a class to open rows */
+	.open td:nth-of-type(1),
+	.open td:nth-of-type(5) {
+		display: table-cell;
+	}
+
+	.transaction-chart {
+		gap: 32px;
+	}
+	.transaction-chart div {
+	}
 }
 
 body {
@@ -10,10 +36,19 @@ body {
 	font-weight: 900;
 	font-family: "Open sans", sans-serif;
 	color: rgb(0, 0, 0);
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
 }
 
 label {
 	display: block;
+}
+
+.container-wrapper {
+	width: 100vw;
+	height: 100vh;
+	overflow: hidden !important;
 }
 
 button {
@@ -115,24 +150,24 @@ input {
 .navigator nav.dashboard-ui {
 	display: flex;
 	justify-content: flex-end;
+	height: 5vh;
 }
 .navigator nav {
-	padding: 0 20px;
+	padding: 12px 20px;
 }
 #username {
 	margin-right: 20px;
 }
-#transactionChart {
+
+.chart-wrapper {
 	display: flex;
+	flex-direction: row;
 	justify-content: center;
 	width: 100%;
+	min-width: 800px;
 	height: auto;
-}
-.chart-wrapper {
-	display: block;
-	justify-content: center;
-	width: 800px;
-	height: auto;
+	overflow-x: auto;
+	overflow-y: hidden;
 }
 
 table {
@@ -143,7 +178,7 @@ table {
 }
 
 thead tr {
-	background-color: #009879;
+	background-color: rgba(201, 89, 79, 0.5);
 	color: #333333; /* Soft black */
 	text-align: left;
 	font-weight: bold;
@@ -166,42 +201,91 @@ tbody tr:hover {
 }
 
 td {
+	width: auto;
 	padding: 10px;
 	text-align: left;
 }
 
-canvas.chart-canvas {
-	width: 100%;
-	height: auto;
-}
-
-/* Responsive styles for mobile devices */
-@media (max-width: 768px) {
-	thead {
-		display: none; /* Hide header on mobile */
-	}
-
-	tbody tr {
-		border: 1px solid #dddddd; /* Add border to rows on mobile */
-	}
-
-	td {
-		display: flex; /* Make cells display as flex items */
-		flex-wrap: wrap; /* Allow cell contents to wrap */
-	}
-
-	/* Make type icon and description take up full width on mobile */
-	td:first-child,
-	td:nth-child(2) {
-		width: 100%;
-	}
-}
 .notification {
 	font-size: 10px;
 	color: red;
 }
 input[type="submit"] {
 	cursor: pointer;
+	border-radius: 10px;
+	background-color: #13131388;
+	color: white;
 }
 input[type="submit"]:hover {
+	background-color: rgba(201, 89, 79, 0.5);
+	transition-duration: 0.4s;
+}
+
+#fetchData {
+	display: grid;
+	height: calc(100vh - 5vh);
+	max-height: calc(100vh - 5vh);
+	grid-template-columns: 1fr;
+	grid-template-rows: minmax(175px, 47.5vh);
+	max-width: 100vw;
+	overflow-x: hidden;
+}
+
+.transaction-chart {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(320px, 1fr));
+	grid-template-rows: 1fr;
+	overflow-y: hidden;
+	overflow-x: auto;
+	gap: 32px;
+	width: 100%;
+	min-width: 100%;
+	height: calc(100vh - 5vh - 47.5vh);
+	box-sizing: border-box;
+}
+
+.transaction-chart div {
+	display: block;
+	box-sizing: content-box;
+	margin: 0 auto;
+}
+
+.chart-wrapper {
+	display: flex;
+	flex-direction: row;
+	padding: 22px 0px;
+	width: 100%;
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+
+.transaction-history {
+	height: calc(100vh - 5vh - 47.5vh);
+	width: 100%;
+	max-height: calc(100vh - 5vh - 47.5vh);
+	overflow-y: auto;
+	background-color: #333333;
+	box-sizing: border-box;
+}
+
+/* Wrapper for transaction description and type */
+.transactions-dsc-type_wrapper {
+	display: flex;
+	flex-direction: column;
+	row-gap: 10px;
+}
+
+.transactions-dsc-type_wrapper table {
+	height: 100%;
+}
+
+.transactions-dsc-type_wrapper h5 {
+	font-size: 14px;
+	margin: 0;
+}
+
+.transactions-dsc-type_wrapper p {
+	margin: 0;
+	font-size: 10px;
+	font-weight: 400;
 }

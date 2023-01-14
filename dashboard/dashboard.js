@@ -30,16 +30,18 @@ async function fetchTransactionAPI() {
 	);
 
 	// Generate chart from data
-	const chartPie = transactionChart(
+	const chartPie = transactionsChart(
 		apiResponse.transactions,
-		apiResponse.transacationTypes
+		apiResponse.transacationTypes,
+		"chart-transactions-types"
 	);
 
+	const barChart = spendingsChart(apiResponse.transactions, "chart-spendings");
 	// Append table to wrapper
 	transactionsTableWrapper.appendChild(table);
 }
 
-function transactionChart(dataArray, labelsArray) {
+function transactionsChart(dataArray, labelsArray, idString) {
 	// check if data and transactionTypes are defined
 	if (!dataArray || !labelsArray) {
 		console.error("Data or transaction types are not defined");
@@ -56,7 +58,7 @@ function transactionChart(dataArray, labelsArray) {
 	const chartLabels = Object.keys(typeCount).map(key => labelsArray[key]);
 	const chartData = Object.values(typeCount);
 
-	var ctx = document.getElementById("chart").getContext("2d");
+	var ctx = document.getElementById(`${idString}`).getContext("2d");
 	var myPieChart = new Chart(ctx, {
 		type: "pie",
 		data: {
@@ -75,7 +77,41 @@ function transactionChart(dataArray, labelsArray) {
 	});
 }
 
-function generateTable(data, transactionTypes) {
+function spendingsChart(data, idString) {
+	// check if data and transactionTypes are defined
+	if (!data || !idString) {
+		console.error("Data or ID is not defined");
+		return;
+	}
+
+	const dateAndBalance = data.map(({ date, balance }) => ({
+		date,
+		balance,
+	}));
+
+	const dates = dateAndBalance.map(({ date }) => date);
+	const balance = dateAndBalance.map(({ balance }) => balance);
+
+	var ctx = document.getElementById(`${idString}`).getContext("2d");
+	var myPieChart = new Chart(ctx, {
+		type: "bar",
+		data: {
+			labels: dates, // labels for each slice of the pie
+			datasets: [
+				{
+					data: balance, // count of each transaction type
+					backgroundColor: ["#007bff", "#28a745", "#333333", "#c3e6cb"], // colors for each slice of the pie
+				},
+			],
+		},
+		options: {
+			responsive: true,
+			maintainAspectRatio: false,
+		},
+	});
+}
+
+function generateTable(transactions, transactionTypes) {
 	const table = document.createElement("table");
 	const thead = document.createElement("thead");
 	const tbody = document.createElement("tbody");
@@ -84,31 +120,45 @@ function generateTable(data, transactionTypes) {
 	thead.innerHTML = `
 	  <tr>
 		<th>Data</th>
-		<th>Ikona</th>
+		<th>Typ Transakcji</th>
 		<th>Opis</th>
-		<th>Zmiana</th>
+		<th>Kwota</th>
 		<th>Saldo</th>
 	  </tr>
 	`;
 
-	// Add rows to the body
-	data.forEach(row => {
-		tbody.innerHTML += `
-		<tr>
-		  <td>${row.date}</td>
+	// Add rows to the body, rows represents object transactions with transaction attributes
+	const rows = transactions.map(transaction => {
+		const row = document.createElement("tr");
+		row.dataset.date = transaction.date;
+		row.dataset.balance = transaction.balance;
+		row.innerHTML = `
+		  <td>${transaction.date}</td>
 		  <td>
-			<i class="fas fa-${getIcon(row.type)}"></i>
+			<i class="fas fa-${getIcon(transaction.type)}"></i>
 		  </td>
-		  <td>${row.description}</td>
-		  <td>${row.amount}</td>
-		  <td>${row.balance}</td>
-		</tr>
+		  <td>
+		  	<span class="transactions-dsc-type_wrapper">
+		  	<h5>${transaction.description}</h5>
+			<p>${transactionTypes[transaction.type]}</p>
+			</span>
+		  </td>
+		  <td>${transaction.amount}</td>
+		  <td>${transaction.balance}</td>
 	  `;
+		return row;
 	});
 
 	// Add the header and body to the table
 	table.appendChild(thead);
 	table.appendChild(tbody);
+
+	console.log(rows);
+
+	// Add tr to table body
+	rows.forEach(row => {
+		tbody.appendChild(row);
+	});
 
 	// Return the table
 	return table;
@@ -129,3 +179,40 @@ function getIcon(type) {
 			return "question";
 	}
 }
+
+// Sorting dates array of strings ascending
+function sortDates(dates) {
+	return dates.sort((a, b) => {
+		const year1 = a.substring(0, 4);
+		const month1 = a.substring(5, 7);
+		const day1 = a.substring(8);
+
+		const year2 = b.substring(0, 4);
+		const month2 = b.substring(5, 7);
+		const day2 = b.substring(8);
+
+		if (year1 !== year2) {
+			return year1 - year2;
+		} else if (month1 !== month2) {
+			return month1 - month2;
+		} else {
+			return day1 - day2;
+		}
+	});
+}
+
+// Mobile transaction table expand functionality
+const rows = document.querySelectorAll("tbody tr");
+
+rows.forEach(row => {
+	row.addEventListener("click", function () {
+		// Remove the open class from any previously open row
+		const openRow = document.querySelector(".open");
+		if (openRow) {
+			openRow.classList.remove("open");
+		}
+
+		// Add the open class to the clicked row
+		this.classList.toggle("open");
+	});
+});

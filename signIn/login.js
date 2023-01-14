@@ -28,9 +28,11 @@ function signIn() {
 		},
 	};
 
+	// Set hash of password
+	user.password.value = stringToHash(user.password.value);
+
 	// Get the user data from local storage
 	const userDataString = getUserDataString();
-	console.log("LOGIN", userDataString);
 
 	// Parse the string into an array of objects
 	const userDataArray = JSON.parse(userDataString);
@@ -140,4 +142,19 @@ function isUserData() {
 // Create user data in local storage
 function createUserData() {
 	window.localStorage.setItem("userData", JSON.stringify([]));
+}
+
+// Hash passowrd for 32 bit int
+function stringToHash(string) {
+	let hash = 0;
+
+	if (string.length == 0) return hash;
+
+	for (i = 0; i < string.length; i++) {
+		char = string.charCodeAt(i);
+		hash = (hash << 5) - hash + char;
+		hash = hash & hash;
+	}
+
+	return hash;
 }

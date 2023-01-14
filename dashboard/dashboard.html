@@ -24,26 +24,39 @@
 </head>
 
 <body>
+    <div class="container-wrapper">
 
-    <div class="navigator">
-        <nav class="dashboard-ui">
-            <p>Witaj, <span id="username"></span></p>
-            <button class="logout" onclick="location.href='./../index.html'">Wyloguj</button>
-        </nav>
-    </div>
 
-    <div id="fetchData">
-        <div id="transactionChart">
-            <div class="chart-wrapper">
-                <canvas id="chart" class="chart-canvas"></canvas>
+
+        <div class="navigator">
+            <nav class="dashboard-ui">
+                <p>Witaj, <span id="username"></span></p>
+                <button class="logout" onclick="location.href='./../index.html'">Wyloguj</button>
+            </nav>
+        </div>
+
+
+
+
+
+
+
+
+        <div id="fetchData">
+            <div class="transaction-chart">
+                <div>
+                    <canvas id="chart-transactions-types" class="chart-canvas">
+                    </canvas>
+                </div>
+                <div><canvas id="chart-spendings" class="chart-canvas"></canvas></div>
+            </div>
+            <div class="transaction-history">
+                <div id="transaction-table-wrapper"></div>
             </div>
         </div>
-        <div id="transactionHistory">
-            <div id="transaction-table-wrapper"></div>
-        </div>
     </div>
-
     <script src="./dashboard.js"></script>
+
 
 </body>
 

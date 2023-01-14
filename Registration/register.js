@@ -61,48 +61,69 @@ function validateRegisterForm() {
 		users.map(u => u.name)
 	);
 
+	//  Find user in list of users from local storage
 	if (!isUsernameAvaible(users, user)) {
 		let warning = "Nazwa użytkownika jest już zajęta.";
 		showNotification(user.name.input, warning);
 		validationSuccess = false;
 	}
 
+	//  Find email in list of users from local storage
 	if (!isEmailAvaible(users, user)) {
 		let warning = "Email jest już zajęty.";
 		showNotification(user.email.input, warning);
 		validationSuccess = false;
 	}
 
-	if (user.email.value.length < 3) {
-		let warning = "Email musi posiadać minimum 3 znaki!";
+	// Email - is valid  format
+	if (!isValidEmail(user.email.value)) {
+		let warning = "Email ma niepoprawny format.";
 		showNotification(user.email.input, warning);
 		validationSuccess = false;
 	}
 
-	if (user.email.value === "" && user.email.value.length === 0) {
+	//  Email - check if email field is empty and if number of characters is 0
+	if (user.email.value === "" || user.email.value.length === 0) {
 		let warning = "Email nie może być pusty!";
 		showNotification(user.email.input, warning);
 		validationSuccess = false;
 	}
 
-	if (user.name.value === "" && user.name.value.length === 0) {
-		let warning = "Nazwa użytkownika nie może być pusta!";
+	if (!isOnlyDigitsOrLetters(user.name.value)) {
+		let warning = "Pole użytkownika zawiera niedozwolone znaki!";
+		showNotification(user.name.input, warning);
+		validationSuccess - false;
+	}
+
+	if (!validateUsername(user.name.value)) {
+		let warning =
+			"Nazwa użytkownika musi mieć od 6 do 16 znaków. Min. 5 liter i 1 cyfrę oraz dozwolone as tylko - _ [ ]  / ";
 		showNotification(user.name.input, warning);
 		validationSuccess = false;
 	}
 
+	// Name - check if user name length is 6 =< user name >= 16
+	if (6 > user.name.value.length || user.name.value.length > 16) {
+		let warning = "Nazwa użytkownika musi mieć od 6 do 16 znaków.";
+		showNotification(user.name.input, warning);
+		validationSuccess = false;
+	}
+
+	// Email - Is user email not a user confirm email
 	if (user.email.value !== user.confirmEmail.value) {
 		let warning = "Pola E-mail nie są zgodne!";
 		showNotification(user.email.input, warning);
 		validationSuccess = false;
 	}
 
+	// Password - Is password  empty string
 	if (user.password.value === "") {
 		let warning = "Pole hasło nie może być puste!";
 		showNotification(user.password.input, warning);
 		validationSuccess = false;
 	}
 
+	// Is password characters count less than 6
 	if (user.password.value.length < 6) {
 		let warning = "Hasło musi zawierać conajmniej 6 znaków!";
 		showNotification(user.password.input, warning);
@@ -127,6 +148,9 @@ function setUserToLocalStorage() {
 	if (userDataString) {
 		userDataArray = JSON.parse(userDataString);
 	}
+
+	// Hash password
+	newUser.password = stringToHash(newUser.password);
 
 	// Add new user to the array
 	userDataArray.push(newUser);
@@ -209,11 +233,53 @@ function createUserData() {
 }
 
 // Find if email already exists
-function isEmailAvaible(users, user) {
-	return users.includes(u => u.email === user.email.value);
+function isEmailAvaible(users, userName) {
+	return users.filter(user => user.email === userName.email.value).length === 0;
 }
 
 // Find if username already exists
-function isUsernameAvaible(users, user) {
-	return users.includes(u => u.name === user.name.value);
+function isUsernameAvaible(users, userName) {
+	return users.filter(user => user.name === userName.name.value).length === 0;
+}
+
+// Find if string is made only with letters or digits - pattern of RegExp
+function isOnlyDigitsOrLetters(str) {
+	return str.match(/^[a-zA-Z0-9]+$/) !== null;
+}
+
+// Check for basic email format
+function isValidEmail(email) {
+	const emailParts = email.split("@");
+	if (emailParts.length !== 2) {
+		return false;
+	}
+	const [username, domain] = emailParts;
+	if (username.length === 0 || domain.length === 0) {
+		return false;
+	}
+	if (!domain.includes(".")) {
+		return false;
+	}
+	return true;
+}
+
+// Hash passowrd for 32 bit int
+function stringToHash(string) {
+	var hash = 0;
+
+	if (string.length == 0) return hash;
+
+	for (i = 0; i < string.length; i++) {
+		char = string.charCodeAt(i);
+		hash = (hash << 5) - hash + char;
+		hash = hash & hash;
+	}
+
+	return hash;
+}
+
+function validateUsername(username) {
+	const pattern =
+		/^(?=.{6,16})(?=.*[a-zA-Z]{5,})(?=.*\d)[a-zA-Z\d_\-\[\]\\\/]*$/;
+	return pattern.test(username);
 }
