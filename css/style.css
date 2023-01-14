@@ -149,7 +149,7 @@ input {
 
 .navigator nav.dashboard-ui {
 	display: flex;
-	justify-content: flex-end;
+	justify-content: flex-end;2
 	height: 5vh;
 }
 .navigator nav {
@@ -157,6 +157,7 @@ input {
 }
 #username {
 	margin-right: 20px;
+	margin-bottom: 5px;
 }
 
 .chart-wrapper {
