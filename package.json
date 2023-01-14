@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "@babel/cli": "^7.20.7",
-    "@babel/core": "^7.20.12",
-    "@babel/preset-env": "^7.20.2",
-    "chart.js": "^4.1.2",
-    "live-server": "^1.2.2"
-  }
-}
